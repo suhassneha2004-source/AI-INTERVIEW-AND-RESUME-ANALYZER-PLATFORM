@@ -1,16 +1,166 @@
-# React + Vite
+# 🎯 AI Interview Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An intelligent resume analyzer that uses AI to provide personalized interview preparation.
 
-Currently, two official plugins are available:
+## 🚀 Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- Groq API Key (get free at [console.groq.com](https://console.groq.com))
 
-## React Compiler
+### Local Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#### Backend Setup
+```bash
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate  # Windows
+# OR
+source venv/bin/activate  # Mac/Linux
 
-## Expanding the ESLint configuration
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend runs on: `http://localhost:8000`
+Frontend runs on: `http://localhost:5173`
+
+## 📋 Features
+
+- ✅ **Resume Upload** - Upload PDF resumes for analysis
+- ✅ **AI Analysis** - Get ATS scores, skills, strengths, weaknesses
+- ✅ **Interview Questions** - 50+ technical & HR questions with answers
+- ✅ **Difficulty Levels** - Beginner, Intermediate, Advanced
+- ✅ **Responsive UI** - Works on all devices
+
+## 🌐 Deployment
+
+### Deploy to Render (Free)
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed step-by-step instructions.
+
+**TL;DR:**
+1. Push to GitHub
+2. Connect GitHub to Render
+3. Deploy backend + frontend
+4. Share your public URL!
+
+### Quick Links
+- Frontend: `https://your-frontend.onrender.com`
+- Backend: `https://your-backend.onrender.com`
+
+## 📁 Project Structure
+
+```
+AI-Interview-Platform/
+├── backend/
+│   ├── app/
+│   │   ├── main.py          # FastAPI server
+│   │   ├── resume.py        # Resume analysis & AI
+│   │   └── interview.py      # Interview logic
+│   ├── requirements.txt
+│   ├── .env                 # API keys (don't commit)
+│   └── Dockerfile          # For deployment
+├── frontend/
+│   ├── src/
+│   │   ├── pages/          # Home, Results
+│   │   ├── components/     # Reusable UI components
+│   │   ├── services/       # API client
+│   │   └── assets/
+│   ├── package.json
+│   └── vite.config.js
+└── DEPLOYMENT.md           # Deployment guide
+```
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React 19 + Vite
+- Tailwind CSS
+- React Router
+- React Circular Progressbar
+
+### Backend
+- FastAPI
+- Groq AI (llama-3.1-8b-instant)
+- PyMuPDF (PDF extraction)
+
+## 🔑 Environment Variables
+
+### Backend (.env)
+```
+GROQ_API_KEY=your_key_here
+```
+
+### Frontend (.env.local)
+```
+VITE_API_URL=http://localhost:8000
+```
+
+## 📝 API Endpoints
+
+### `POST /upload-resume`
+Upload a PDF resume for analysis.
+
+**Request:**
+```json
+{
+  "file": "resume.pdf"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "analysis": {
+    "overview": {...},
+    "technical_questions": [...],
+    "hr_questions": [...]
+  }
+}
+```
+
+## 🐛 Troubleshooting
+
+**Frontend can't connect to backend?**
+- Check `VITE_API_URL` environment variable
+- Ensure backend is running
+- Check CORS is enabled
+
+**Groq API key not working?**
+- Verify key in `.env`
+- Check Groq account has credits
+- Regenerate key if needed
+
+**PDF upload fails?**
+- Ensure file is PDF format
+- Check file size (should be < 10MB)
+- Verify PDF is not corrupted
+
+## 📚 Learn More
+
+- [FastAPI Docs](https://fastapi.tiangolo.com)
+- [React Docs](https://react.dev)
+- [Groq API Docs](https://console.groq.com/docs)
+- [Render Docs](https://render.com/docs)
+
+## 📄 License
+
+MIT License - feel free to use this project!
+
+## 🤝 Contributing
+
+Pull requests welcome! Feel free to improve the project.
+
+---
+
+**Ready to deploy?** Check out [DEPLOYMENT.md](./DEPLOYMENT.md) 🚀
